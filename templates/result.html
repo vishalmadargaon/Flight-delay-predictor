@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="result-container">
+    <div class="result-header">
+        <h1><i class="fas fa-chart-line"></i> Prediction Results</h1>
+        <p>Flight delay analysis for your input data</p>
+    </div>
+
+    <!-- Summary Card -->
+    <div class="summary-card">
+        <div class="summary-header">
+            <h3>Flight Summary</h3>
+            <div class="carrier-badge">
+                <i class="fas fa-plane"></i> {{ input_data.carrier }} • {{ input_data.airport }}
+            </div>
+        </div>
+        <div class="summary-grid">
+            <div class="summary-item">
+                <span class="summary-label">Year/Month</span>
+                <span class="summary-value">{{ input_data.year }}/{{ input_data.month }}</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Arriving Flights</span>
+                <span class="summary-value">{{ input_data.arr_flights }}</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Delayed Flights</span>
+                <span class="summary-value">{{ input_data.arr_del15 }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delay Predictions -->
+    <div class="results-grid">
+        {% for delay_type, minutes in results.items() %}
+        <div class="result-card delay-{{ delay_type.replace('_', '-') }}">
+            <div class="result-icon">
+                {% if delay_type == 'arr_delay' %}
+                    <i class="fas fa-clock"></i>
+                {% elif delay_type == 'carrier_delay' %}
+                    <i class="fas fa-building"></i>
+                {% elif delay_type == 'weather_delay' %}
+                    <i class="fas fa-cloud-rain"></i>
+                {% elif delay_type == 'nas_delay' %}
+                    <i class="fas fa-traffic-light"></i>
+                {% elif delay_type == 'security_delay' %}
+                    <i class="fas fa-shield-alt"></i>
+                {% else %}
+                    <i class="fas fa-plane-arrival"></i>
+                {% endif %}
+            </div>
+            <div class="result-content">
+                <h4>{{ delay_type.replace('_', ' ').title() }}</h4>
+                <div class="delay-amount">{{ "%.2f"|format(minutes) }} minutes</div>
+            </div>
+            <div class="result-bar">
+                <div class="bar-fill" style="width: {{ (minutes / results.arr_delay * 100) if results.arr_delay > 0 else 0 }}%"></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Total Delay Card -->
+    <div class="total-delay-card">
+        <div class="total-delay-content">
+            <h3>Total Predicted Delay</h3>
+            <div class="total-delay-amount">
+                {{ "%.2f"|format(results.arr_delay) }} <span>minutes</span>
+            </div>
+            <p>Combined impact of all delay factors</p>
+        </div>
+        <div class="total-delay-visual">
+            <div class="delay-gauge">
+                <div class="gauge-fill" style="height: {{ (results.arr_delay / 180 * 100) if results.arr_delay <= 180 else 100 }}%"></div>
+            </div>
+            <div class="gauge-labels">
+                <span>0 min</span>
+                <span>180+ min</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="result-actions">
+        <a href="{{ url_for('input_page') }}" class="btn btn-primary">
+            <i class="fas fa-redo"></i> New Prediction
+        </a>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">
+            <i class="fas fa-history"></i> View History
+        </a>
+    </div>
+</div>
+{% endblock %}

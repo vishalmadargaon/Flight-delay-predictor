@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="input-container">
+    <div class="input-header">
+        <h1><i class="fas fa-plane-departure"></i> Flight Delay Prediction</h1>
+        <p>Enter flight details to predict potential delays</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('predict') }}" class="prediction-form">
+        <div class="form-grid">
+            <!-- Basic Information -->
+            <div class="form-section">
+                <h3><i class="fas fa-info-circle"></i> Basic Information</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <input type="number" id="year" name="year" value="2024" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="month">Month</label>
+                        <input type="number" id="month" name="month" min="1" max="12" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="carrier">Carrier Code</label>
+                        <input type="text" id="carrier" name="carrier" placeholder="e.g., AA, DL, UA" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="airport">Airport Code</label>
+                        <input type="text" id="airport" name="airport" placeholder="e.g., ATL, LAX, JFK" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flight Statistics -->
+            <div class="form-section">
+                <h3><i class="fas fa-chart-bar"></i> Flight Statistics</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="arr_flights">Arriving Flights</label>
+                        <input type="number" id="arr_flights" name="arr_flights" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="arr_del15">Delayed Flights (>15 min)</label>
+                        <input type="number" id="arr_del15" name="arr_del15" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delay Causes -->
+            <div class="form-section">
+                <h3><i class="fas fa-exclamation-triangle"></i> Delay Causes Count</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="carrier_ct">Carrier Causes</label>
+                        <input type="number" step="0.1" id="carrier_ct" name="carrier_ct" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="weather_ct">Weather Causes</label>
+                        <input type="number" step="0.1" id="weather_ct" name="weather_ct" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nas_ct">NAS Causes</label>
+                        <input type="number" step="0.1" id="nas_ct" name="nas_ct" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="security_ct">Security Causes</label>
+                        <input type="number" step="0.1" id="security_ct" name="security_ct" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="late_aircraft_ct">Late Aircraft</label>
+                        <input type="number" step="0.1" id="late_aircraft_ct" name="late_aircraft_ct" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="form-section">
+                <h3><i class="fas fa-clipboard-list"></i> Additional Information</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="arr_cancelled">Cancelled Flights</label>
+                        <input type="number" id="arr_cancelled" name="arr_cancelled" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="arr_diverted">Diverted Flights</label>
+                        <input type="number" id="arr_diverted" name="arr_diverted" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-large">
+                <i class="fas fa-bolt"></i> Predict Delays
+            </button>
+            <button type="reset" class="btn btn-secondary">
+                <i class="fas fa-redo"></i> Reset Form
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

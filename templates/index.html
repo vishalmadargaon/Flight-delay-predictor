@@ -1,0 +1,329 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Enhanced Image Slideshow -->
+<section class="hero-slideshow">
+    <div class="slideshow-container">
+        <div class="slides-wrapper">
+            <div class="slide active">
+                <div class="slide-image" style="background-image: url('https://i.pinimg.com/originals/3a/23/cf/3a23cfda773ba44ddda6b8c98b5d6869.gif');"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h2 class="slide-title">Intelligent Flight Delay Prediction</h2>
+                    <p class="slide-description">Harness the power of AI to predict flight delays with unprecedented accuracy</p>
+                    <div class="slide-badge">
+                        <i class="fas fa-rocket"></i>
+                        <span>95% Accuracy</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-image" style="background-image: url('https://compote.slate.com/images/fdfed3e4-bd6f-4b8d-b1f9-990ef275df40.gif');"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h2 class="slide-title">Real-Time Analytics Dashboard</h2>
+                    <p class="slide-description">Monitor flight patterns and delay factors in real-time</p>
+                    <div class="slide-badge">
+                        <i class="fas fa-bolt"></i>
+                        <span>Live Updates</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-image" style="background-image: url('https://minio.havehalalwilltravel.com/hhwt-upload/original_images/15012023162332_giphy.gif');"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h2 class="slide-title">Comprehensive Delay Analysis</h2>
+                    <p class="slide-description">Break down delays by weather, carrier, security and more</p>
+                    <div class="slide-badge">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>Detailed Insights</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-image" style="background-image: url('https://cdn.dribbble.com/userupload/23786927/file/original-cab3fffe0a17738e0cbfb9b0ac91b5a1.gif');"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h2 class="slide-title">Multi-Airline Support</h2>
+                    <p class="slide-description">Covering 50+ airlines and airports worldwide</p>
+                    <div class="slide-badge">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Global Coverage</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide Navigation -->
+        <div class="slide-nav">
+            <button class="nav-btn prev-btn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-btn next-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        
+        <!-- Slide Indicators -->
+        <div class="slide-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+            <span class="indicator" data-slide="3"></span>
+        </div>
+    </div>
+    
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+        <div class="floating-plane" style="--delay: 0s;">
+            <i class="fas fa-plane"></i>
+        </div>
+        <div class="floating-cloud" style="--delay: 1s;">
+            <i class="fas fa-cloud"></i>
+        </div>
+        <div class="floating-star" style="--delay: 2s;">
+            <i class="fas fa-star"></i>
+        </div>
+        <div class="floating-heart" style="--delay: 1.5s;">
+            <i class="fas fa-heart"></i>
+        </div>
+        <div class="floating-bolt" style="--delay: 0.5s;">
+            <i class="fas fa-bolt"></i>
+        </div>
+    </div>
+</section>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">
+            <i class="fas fa-crown"></i>
+            <span>AI-Powered Platform</span>
+        </div>
+        <h1 class="hero-title">
+            <span class="title-main">Predict Flight Delays</span>
+            <span class="title-sub">with Machine Learning Precision</span>
+        </h1>
+        <p class="hero-description">
+            Advanced AI-powered system to predict flight delays and optimize your travel experience. 
+            Get real-time insights into arrival delays and contributing factors.
+        </p>
+        <div class="hero-buttons">
+            {% if session.user_id %}
+                <a href="{{ url_for('input_page') }}" class="btn btn-primary btn-glow">
+                    <i class="fas fa-rocket"></i> Make Prediction
+                </a>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">
+                    <i class="fas fa-chart-line"></i> View Dashboard
+                </a>
+            {% else %}
+                <a href="{{ url_for('register') }}" class="btn btn-primary btn-glow">
+                    <i class="fas fa-user-plus"></i> Get Started Free
+                </a>
+                <a href="{{ url_for('login') }}" class="btn btn-secondary">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+            {% endif %}
+        </div>
+        
+        <!-- Animated Stats -->
+        <div class="animated-stats">
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-plane-departure"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number" data-target="50000">0</div>
+                    <div class="stat-label">Flights Analyzed</div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number" data-target="95">0</div>
+                    <div class="stat-label">Prediction Accuracy</div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number" data-target="24">0</div>
+                    <div class="stat-label">/7 Monitoring</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-visual">
+        <div class="visual-container">
+            <div class="main-plane">
+                <i class="fas fa-plane"></i>
+            </div>
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring delay-1"></div>
+            <div class="pulse-ring delay-2"></div>
+            
+            <!-- Animated background elements -->
+            <div class="bg-circle circle-1"></div>
+            <div class="bg-circle circle-2"></div>
+            <div class="bg-circle circle-3"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">
+                <i class="fas fa-star"></i>
+                Why Choose SkyAnalytics?
+            </div>
+            <h2 class="section-title">Revolutionary Flight Delay Prediction</h2>
+            <p class="section-subtitle">Experience the future of flight analytics with our cutting-edge platform</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <div class="icon-bg"></div>
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>AI-Powered Predictions</h3>
+                <p>Advanced machine learning algorithms trained on millions of flight records for accurate delay predictions.</p>
+                <div class="feature-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <div class="icon-bg"></div>
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Real-Time Analysis</h3>
+                <p>Get instant predictions with our optimized processing system and real-time data analysis.</p>
+                <div class="feature-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <div class="icon-bg"></div>
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h3>Detailed Insights</h3>
+                <p>Break down delays by category: carrier, weather, security, and more for comprehensive understanding.</p>
+                <div class="feature-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <div class="icon-bg"></div>
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Secure & Reliable</h3>
+                <p>Enterprise-grade security with 99.9% uptime guarantee for uninterrupted service.</p>
+                <div class="feature-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <div class="icon-bg"></div>
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile Friendly</h3>
+                <p>Access your predictions and dashboard from any device with our responsive design.</p>
+                <div class="feature-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <div class="icon-bg"></div>
+                    <i class="fas fa-cloud-sun"></i>
+                </div>
+                <h3>Weather Integration</h3>
+                <p>Real-time weather data integration for accurate weather-related delay predictions.</p>
+                <div class="feature-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Animated Stats Section -->
+<section class="animated-stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <div class="stat-number" data-target="50">0</div>
+                <div class="stat-label">Airlines Supported</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="stat-number" data-target="200">0</div>
+                <div class="stat-label">Airports Covered</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="stat-number" data-target="10">0</div>
+                <div class="stat-label">Million+ Records</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-number" data-target="5000">0</span>+</div>
+                <div class="stat-label">Happy Users</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Transform Your Flight Experience?</h2>
+            <p>Join thousands of users who trust SkyAnalytics for accurate flight delay predictions</p>
+            <div class="cta-buttons">
+                {% if session.user_id %}
+                    <a href="{{ url_for('input_page') }}" class="btn btn-primary btn-large btn-glow">
+                        <i class="fas fa-rocket"></i> Make Prediction Now
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('register') }}" class="btn btn-primary btn-large btn-glow">
+                        <i class="fas fa-user-plus"></i> Start Free Trial
+                    </a>
+                    <a href="{{ url_for('login') }}" class="btn btn-secondary btn-large">
+                        <i class="fas fa-sign-in-alt"></i> Login to Account
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Floating Action Button -->
+<div class="floating-action">
+    <div class="fab-btn">
+        <i class="fas fa-plane"></i>
+    </div>
+    <div class="fab-tooltip">
+        Start Predicting!
+    </div>
+</div>
+{% endblock %}
